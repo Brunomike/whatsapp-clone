@@ -37,7 +37,7 @@
   background-repeat: repeat;
   background-position: center;
   padding: 30px;
-  overflow: scroll;
+  overflow: auto;
 }
 .chat__message {
   position: relative;
@@ -47,6 +47,7 @@
   border-radius: 10px;
   width: fit-content;
   margin-bottom: 30px;
+  max-width: 300px;
 }
 
 .chat__receiver {

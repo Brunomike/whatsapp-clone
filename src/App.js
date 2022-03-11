@@ -3,12 +3,12 @@ import { Routes } from "react-router";
 import Sidebar from "./components/sidebar/Sidebar";
 import Chat from "./components/chat/Chat";
 import Login from "./components/login/Login";
-
 import "./App.css";
 import React, { useState } from "react";
+import {useStateValue} from "./StateProvider";
 
 const App = () => {
-  const [user, setUser] = useState(null);
+  const [{user}, dispatch] = useStateValue();
   //BEM naming convention
   return (
     <>

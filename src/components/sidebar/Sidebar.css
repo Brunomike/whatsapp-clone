@@ -53,12 +53,11 @@
 
 .sidebar__chats{
     flex: 1;
-    background-color: white;
-    /* overflow-y: scroll; */
-    overflow: scroll;
+    background-color: white;    
+    overflow: auto;
 }
 
 .sidebar__chats a{
-    text-decoration: none;
+    text-decoration: none !important;
     color: inherit;
 }
