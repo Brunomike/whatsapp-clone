@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useParams } from "react-router";
 import { Avatar, IconButton } from "@material-ui/core";
 import {
   SearchOutlined,
@@ -7,11 +8,26 @@ import {
   InsertEmoticon as InsertEmoticonIcon,
   Mic as MicIcon,
 } from "@material-ui/icons";
+import db from "../../firebase";
 import "./Chat.css";
 
 const Chat = () => {
   const [input, setInput] = useState("");
   const [seed, setSeed] = useState("");
+  const [roomName, setRoomName] = useState("");
+
+  const { roomId } = useParams();
+
+  useEffect(() => {
+    if (roomId) {
+        db.collection('rooms')
+        .doc(roomId)
+        .onSnapshot(snapshot=>{
+            setRoomName(snapshot.data().name)
+        })
+    }
+  }, [roomId]);
+
   useEffect(() => {
     setSeed(Math.floor(Math.random() * 5000));
   }, []);
@@ -22,9 +38,9 @@ const Chat = () => {
   };
 
   const handleChange = (e) => {
-      setInput(e.target.value);
+    setInput(e.target.value);
 
-      setInput("");
+    setInput("");
   };
 
   return (
@@ -32,7 +48,7 @@ const Chat = () => {
       <div className="chat__header">
         <Avatar src={`https://avatars.dicebear.com/api/human/${seed}.svg`} />
         <div className="chat__headerInfo">
-          <h3>Room Name</h3>
+          <h3>{roomName}</h3>
           <p>Last seen at ....</p>
         </div>
         <div className="chat__headerRight">
@@ -58,7 +74,6 @@ const Chat = () => {
           Hey guys
           <span className="chat__timestamp">2:55.pm</span>
         </p>
-        
       </div>
       <div className="chat__footer">
         <IconButton>
